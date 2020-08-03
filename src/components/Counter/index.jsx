@@ -1,24 +1,29 @@
 import React from 'react'
 
 class Counter extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {value: 0};
+        this.state = { value: 0 };
     }
 
     onIncrease = () => {
-        this.setState((preState) => ({value: preState.value + 1}
-            ))};
+        this.setState((preState) => ({ value: preState.value + 1 }
+        ))
+        this.props.handleIncrease()
+
+    };
 
     onDecrease = () => {
-        this.setState((preState) => ({value: preState.value - 1}
-            ))};
+        this.setState((preState) => ({ value: preState.value - 1 }
+        ))
+        this.props.handleDecrease()
+    };
 
     render() {
         return <div>
-            <button onClick = {this.onDecrease}>-</button>
+            <button onClick={this.onDecrease}>-</button>
             <mark>{this.state.value}</mark>
-            <button onClick = {this.onIncrease}>+</button>
+            <button onClick={this.onIncrease}>+</button>
         </div>
     }
 }
