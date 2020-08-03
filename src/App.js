@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import CounterGroup from './components/CounterGroup'
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
@@ -19,7 +19,7 @@ function App() {
         >
           Learn React
         </a>
-        <CounterGroup/>
+        <CounterGroup store = {props.store}/>
       </header>
     </div>
   );

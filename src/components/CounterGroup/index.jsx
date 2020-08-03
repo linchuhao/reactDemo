@@ -1,45 +1,42 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Counter from '../Counter';
+// import PropTypes from 'prop-types'
 
-class CounterGroup extends React.Component {
+class CounterGroup extends Component {
     constructor(props) {
         super(props);
-        this.state = {size : 0, totalCount : 0};
+        this.state = { size: 0, totalCount: 0  };
     }
 
     handleResize = (event) => {
         this.setState({
-            size: event.target.value ? parseInt(event.target.value) : 0
+            size: event.target.value ? parseInt(event.target.value) : 0,
+            totalCount: 0
         })
     }
 
-    handleIncrease = () =>{
-        this.setState((prevState) =>({
-            totalCount: prevState.totalCount + 1
-        }))
-    }
-
-    handleDecrease = () =>{
-        this.setState((prevState) =>({
-            totalCount: prevState.totalCount - 1
-        }))
-    }
 
     render() {
-        const initArray = [...Array(this.state.size).keys()]
-        return <div>
+        const initArray = [...Array(this.state.size).keys()];
+
+        return (
+        <div>
             <label>
                 Group size:
-                <input defaultValue={0} onChange={this.handleResize} ></input>
+                <input defaultValue={0} onBlur={this.handleResize} ></input>
             </label>
             <br></br>
             <label>
-                Total Value: {this.state.totalCount}
+                Total Value: {this.props.store.getState()}
             </label>
             {
-                initArray.map(key => <Counter handleDecrease={this.handleDecrease} handleIncrease={this.handleIncrease} key={key}/>)
+                initArray.map(key => <Counter
+                onIncrement={() => this.props.store.dispatch({type: 'INCREMENT'})}
+                onDecrement={() => this.props.store.dispatch({type: 'DECREMENT'})}
+                 key={key} />)
             }
         </div>
+        )
     }
 }
 
